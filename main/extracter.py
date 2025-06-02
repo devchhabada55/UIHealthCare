@@ -61,7 +61,7 @@ class PDFTextExtractor:
 # Example usage:
 def main():
     # Replace with your actual Gemini API key
-    API_KEY = "AIzaSyBDQfBKivNhofiw4_rqgQ46wMaf99XB6fM"
+    API_KEY = "api"
     
     extractor = PDFTextExtractor("E:/HealthcareProject/data/Bloedafname report-703469671.pdf", API_KEY)
     text = extractor.extract_text()

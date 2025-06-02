@@ -3,7 +3,7 @@ const router = express.Router();
 const OpenAI = require('openai');
 
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: 'api',
 });
 
 const model = 'gpt-4.1-nano-2025-04-14';
