@@ -1,8 +1,8 @@
-
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CloudUpload, FileText, Loader2, CheckCircle, XCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -20,7 +20,9 @@ export const FileUpload = ({
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -83,6 +85,42 @@ export const FileUpload = ({
     setFileError(null);
     if (inputRef.current) {
       inputRef.current.value = "";
+    }
+  };
+
+  const uploadToServer = async () => {
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/upload-pdf", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+
+      const data = await response.json();
+      toast({
+        title: "Success",
+        description: "PDF uploaded successfully",
+      });
+      
+      // Call the analyze function after successful upload
+      onAnalyze();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to upload PDF",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -193,18 +231,18 @@ export const FileUpload = ({
                 <div className="flex justify-center mt-6">
                   <Button
                     className="bg-health-blue hover:bg-health-blue-dark w-full sm:w-auto px-8"
-                    onClick={onAnalyze}
-                    disabled={isLoading}
+                    onClick={uploadToServer}
+                    disabled={isLoading || uploading}
                   >
-                    {isLoading ? (
+                    {isLoading || uploading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Analyzing...
+                        {uploading ? "Uploading..." : "Analyzing..."}
                       </>
                     ) : (
                       <>
                         <CheckCircle className="mr-2 h-4 w-4" />
-                        Analyze Report
+                        Upload & Analyze
                       </>
                     )}
                   </Button>

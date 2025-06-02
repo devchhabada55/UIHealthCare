@@ -1,0 +1,81 @@
+const express = require('express');
+const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const { MentalHealthAnalyzer } = require('../utils/MentalHealthAnalyzer');
+const PDF = require('../models/PDF');
+
+// Configure multer for PDF uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadDir = path.join(__dirname, '../uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype === 'application/pdf') {
+      cb(null, true);
+    } else {
+      cb(new Error('Only PDF files are allowed'));
+    }
+  }
+});
+
+// Initialize the mental health analyzer
+const mentalHealthAnalyzer = new MentalHealthAnalyzer();
+
+// Get latest mental health analysis
+router.get('/', async (req, res) => {
+  try {
+    const analysis = mentalHealthAnalyzer.getLatestAnalysis();
+    res.json(analysis || {});
+  } catch (error) {
+    console.error('Error getting latest analysis:', error);
+    res.status(500).json({ error: 'Failed to get latest analysis' });
+  }
+});
+
+// Upload and analyze PDF
+router.post('/analyze', upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const analysis = await mentalHealthAnalyzer.analyzePDF(req.file.path);
+    res.json({ analysis });
+  } catch (error) {
+    console.error('Error analyzing PDF:', error);
+    res.status(500).json({ error: 'Failed to analyze PDF' });
+  }
+});
+
+// Get analysis by ID
+router.get('/:id', async (req, res) => {
+  try {
+    const analysis = mentalHealthAnalyzer.getAnalysisById(req.params.id);
+    if (!analysis) {
+      return res.status(404).json({ error: 'Analysis not found' });
+    }
+    res.json({ analysis });
+  } catch (error) {
+    console.error('Error getting analysis:', error);
+    res.status(500).json({ error: 'Failed to get analysis' });
+  }
+});
+
+module.exports = router; 
