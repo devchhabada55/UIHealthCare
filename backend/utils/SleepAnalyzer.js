@@ -7,7 +7,7 @@ class SleepAnalyzer {
   constructor() {
     try {
       this.openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY || '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'
+        apiKey: process.env.OPENAI_API_KEY || 'api'
       });
       this.model = 'gpt-4.1-nano-2025-04-14';
       this.analysisHistory = new Map();
