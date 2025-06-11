@@ -80,7 +80,7 @@ export const copyPages = async (
   pageIndices: number[]
 ): Promise<void> => {
   const copiedPages = await targetDoc.copyPages(sourceDoc, pageIndices);
-  copiedPages.forEach((page) => targetDoc.addPage(page));
+  copiedPages.forEach((page: PDFPage) => targetDoc.addPage(page));
 };
 
 // Merge multiple PDF documents
@@ -88,7 +88,7 @@ export const mergePDFs = async (pdfDocs: PDFDocument[]): Promise<PDFDocument> =>
   const mergedPdf = await PDFDocument.create();
   for (const pdfDoc of pdfDocs) {
     const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
-    copiedPages.forEach((page) => mergedPdf.addPage(page));
+    copiedPages.forEach((page: PDFPage) => mergedPdf.addPage(page));
   }
   return mergedPdf;
 };
@@ -103,7 +103,7 @@ export const splitPDF = async (
       const newPdf = await PDFDocument.create();
       const [start, end] = range;
       const pages = await newPdf.copyPages(pdfDoc, Array.from({ length: end - start + 1 }, (_, i) => start + i));
-      pages.forEach((page) => newPdf.addPage(page));
+      pages.forEach((page: PDFPage) => newPdf.addPage(page));
       return newPdf;
     })
   );
@@ -345,21 +345,25 @@ export const addPageNumbers = (
 ): void => {
   const {
     startNumber = 1,
-    fontSize = PDF_FONT_SIZES.MEDIUM,
+    fontSize = PDF_FONT_SIZES.SMALL,
     color = PDF_COLORS.BLACK,
     position = 'bottom',
     margin = 20,
   } = options;
 
   const pages = pdfDoc.getPages();
-  pages.forEach((page, index) => {
+  pages.forEach((page: PDFPage, index: number) => {
+    const pageNumber = startNumber + index;
     const { width, height } = page.getSize();
-    const pageNumber = (startNumber + index).toString();
-    const textWidth = pageNumber.length * (fontSize * 0.6);
+    const textWidth = page.widthOfText(pageNumber.toString(), { size: fontSize });
+    const textHeight = page.heightOfText(pageNumber.toString(), { size: fontSize });
 
-    page.drawText(pageNumber, {
-      x: (width - textWidth) / 2,
-      y: position === 'top' ? height - margin : margin,
+    let x = width / 2 - textWidth / 2;
+    let y = position === 'bottom' ? margin : height - margin - textHeight;
+
+    page.drawText(pageNumber.toString(), {
+      x,
+      y,
       size: fontSize,
       color,
     });

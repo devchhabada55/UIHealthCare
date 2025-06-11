@@ -47,8 +47,7 @@ const formatDate = (date: Date): string => {
 export const createNotification = (
   title: string,
   message: string,
-  type: NotificationType = 'info',
-  options: NotificationOptions = {}
+  type: NotificationType = 'info'
 ): Notification => {
   const notification: Notification = {
     id: generateId(),
@@ -66,37 +65,33 @@ export const createNotification = (
 // Create info notification
 export const createInfoNotification = (
   title: string,
-  message: string,
-  options: NotificationOptions = {}
+  message: string
 ): Notification => {
-  return createNotification(title, message, 'info', options);
+  return createNotification(title, message, 'info');
 };
 
 // Create success notification
 export const createSuccessNotification = (
   title: string,
-  message: string,
-  options: NotificationOptions = {}
+  message: string
 ): Notification => {
-  return createNotification(title, message, 'success', options);
+  return createNotification(title, message, 'success');
 };
 
 // Create warning notification
 export const createWarningNotification = (
   title: string,
-  message: string,
-  options: NotificationOptions = {}
+  message: string
 ): Notification => {
-  return createNotification(title, message, 'warning', options);
+  return createNotification(title, message, 'warning');
 };
 
 // Create error notification
 export const createErrorNotification = (
   title: string,
-  message: string,
-  options: NotificationOptions = {}
+  message: string
 ): Notification => {
-  return createNotification(title, message, 'error', options);
+  return createNotification(title, message, 'error');
 };
 
 // Get all notifications

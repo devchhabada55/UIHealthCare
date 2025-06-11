@@ -1,5 +1,4 @@
-import { ChartData, ChartOptions } from 'chart.js';
-import { Line, Bar, Pie, Doughnut, Radar, PolarArea } from 'react-chartjs-2';
+import type { ChartData, ChartOptions } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -56,7 +55,7 @@ export const defaultChartOptions: ChartOptions = {
       boxPadding: 6,
       usePointStyle: true,
       callbacks: {
-        label: function (context) {
+        label: function (context: any) {
           let label = context.dataset.label || '';
           if (label) {
             label += ': ';
