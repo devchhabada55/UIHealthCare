@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { SpiderChart } from '@/components/visualizations/SpiderChart'; 
 import { Button } from '@/components/ui/button';
-import { CheckCircle2, Trash2, Eye } from 'lucide-react';
+import { Trash2, Eye } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ChatbotPopup from '@/components/ChatbotPopup'; 
@@ -10,7 +10,6 @@ import { useUpload } from '@/contexts/UploadContext';
 import { useHealthData } from '@/contexts/HealthDataContext';
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -39,7 +38,6 @@ const HomePage = () => {
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [storedPDFs, setStoredPDFs] = useState<PDFData[]>([]);
-  const [pdfToDelete, setPdfToDelete] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [showUploadsModal, setShowUploadsModal] = useState(false);
   const { toast } = useToast();
