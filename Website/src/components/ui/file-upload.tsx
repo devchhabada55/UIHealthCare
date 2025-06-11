@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CloudUpload, FileText, Loader2, CheckCircle, XCircle } from "lucide-react";
+import { FileText, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface FileUploadProps {
@@ -104,12 +104,6 @@ export const FileUpload = ({
       if (!response.ok) {
         throw new Error("Upload failed");
       }
-
-      const data = await response.json();
-      toast({
-        title: "Success",
-        description: "PDF uploaded successfully",
-      });
       
       // Call the analyze function after successful upload
       onAnalyze();
@@ -181,7 +175,7 @@ export const FileUpload = ({
             {!file ? (
               <>
                 <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center">
-                  <CloudUpload className="h-8 w-8 text-health-blue" />
+                  {/* <CloudUpload className="h-8 w-8 text-health-blue" /> */}
                 </div>
                 <div className="text-center">
                   <p className="text-gray-700 font-medium">

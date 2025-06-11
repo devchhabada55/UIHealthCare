@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  ResponsiveContainer,
-} from "recharts";
+import { useState, useEffect } from "react";
 import {
   Syringe,
-  Apple,
   AlertTriangle,
 } from "lucide-react";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -115,7 +115,7 @@ const defaultAnalysis: MentalHealthData = {
 
 const MentalHealth = () => {
   const navigate = useNavigate();
-  const { setMentalHealthData, mentalHealthData } = useHealthData();
+  const { setMentalHealthData} = useHealthData();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

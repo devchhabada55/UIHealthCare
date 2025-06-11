@@ -1,8 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { User, Heart, Droplet, SmilePlus, Brain, Dna, Dumbbell, Home } from 'lucide-react';
+import { User, Droplet, SmilePlus, Brain, Dna, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
 import logo from '../../logo.png'; // Assuming the logo path is correct
 
 interface NavItemProps {

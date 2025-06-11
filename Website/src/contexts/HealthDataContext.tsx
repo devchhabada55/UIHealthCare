@@ -49,13 +49,13 @@ export const HealthDataProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
   };
 
-  const clearCache = () => {
-    try {
-      localStorage.removeItem('healthData');
-    } catch (err) {
-      console.error('Error clearing cache:', err);
-    }
-  };
+  // const clearCache = () => {
+  //   try {
+  //     localStorage.removeItem('healthData');
+  //   } catch (err) {
+  //     console.error('Error clearing cache:', err);
+  //   }
+  // };
 
   const refreshData = async () => {
     setLoading(true);

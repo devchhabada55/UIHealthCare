@@ -5,15 +5,12 @@ import {
   Typography,
   Grid,
   CircularProgress,
-  Alert,
   Card,
   CardContent,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
-  LinearProgress,
-  AlertTitle,
   Chip,
 } from '@mui/material';
 import {
@@ -22,9 +19,7 @@ import {
   CheckCircle,
   Warning,
   TrendingUp,
-  LocalHospital,
   Favorite,
-  Speed,
 } from '@mui/icons-material';
 
 // Color scheme for consistent UI
@@ -176,36 +171,36 @@ const Nutrition: React.FC = () => {
     );
   };
 
-  const renderHealthScore = (score: number | undefined | null, isGood?: boolean) => {
-    if (score === undefined || score === null) return "N/A";
+  // const renderHealthScore = (score: number | undefined | null, isGood?: boolean) => {
+  //   if (score === undefined || score === null) return "N/A";
     
-    const numericScore = typeof score === 'number' ? score : 0;
-    const displayColor = isGood === true ? COLORS.success : isGood === false ? COLORS.error : 
-                        numericScore >= 70 ? COLORS.success : numericScore >= 40 ? COLORS.warning : COLORS.error;
+  //   const numericScore = typeof score === 'number' ? score : 0;
+  //   const displayColor = isGood === true ? COLORS.success : isGood === false ? COLORS.error : 
+  //                       numericScore >= 70 ? COLORS.success : numericScore >= 40 ? COLORS.warning : COLORS.error;
 
-    return (
-      <Box display="flex" alignItems="center" gap={2}>
-        <Typography variant="h4" sx={{ color: displayColor }}>
-          {typeof score === 'number' ? `${score}%` : 'N/A'}
-        </Typography>
-        {typeof score === 'number' && (
-          <LinearProgress
-            variant="determinate"
-            value={numericScore}
-            sx={{
-              width: 100,
-              height: 8,
-              borderRadius: 4,
-              backgroundColor: COLORS.background,
-              '& .MuiLinearProgress-bar': {
-                backgroundColor: displayColor,
-              },
-            }}
-          />
-        )}
-      </Box>
-    );
-  };
+  //   return (
+  //     <Box display="flex" alignItems="center" gap={2}>
+  //       <Typography variant="h4" sx={{ color: displayColor }}>
+  //         {typeof score === 'number' ? `${score}%` : 'N/A'}
+  //       </Typography>
+  //       {typeof score === 'number' && (
+  //         <LinearProgress
+  //           variant="determinate"
+  //           value={numericScore}
+  //           sx={{
+  //             width: 100,
+  //             height: 8,
+  //             borderRadius: 4,
+  //             backgroundColor: COLORS.background,
+  //             '& .MuiLinearProgress-bar': {
+  //               backgroundColor: displayColor,
+  //             },
+  //           }}
+  //         />
+  //       )}
+  //     </Box>
+  //   );
+  // };
 
   const getRiskColor = (risk: string) => {
     switch (risk.toUpperCase()) {

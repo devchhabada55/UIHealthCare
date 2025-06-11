@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Activity, 
   TrendingDown, 
@@ -70,13 +70,13 @@ const PhysicalHealthReport = () => {
     "Minimal regular physical activity (mainly padel)"
   ];
 
-  const recommendations = [
-    "Start with 2-3 cardio sessions per week (walking, swimming)",
-    "Begin basic strength training with bodyweight exercises",
-    "Continue physiotherapy for back pain management",
-    "Gradually increase activity level over 3-6 months",
-    "Focus on core strengthening and mobility work"
-  ];
+  // const recommendations = [
+  //   "Start with 2-3 cardio sessions per week (walking, swimming)",
+  //   "Begin basic strength training with bodyweight exercises",
+  //   "Continue physiotherapy for back pain management",
+  //   "Gradually increase activity level over 3-6 months",
+  //   "Focus on core strengthening and mobility work"
+  // ];
 
   if (loading) {
     return (

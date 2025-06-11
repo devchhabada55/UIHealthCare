@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { User, Heart, Droplet, SmilePlus, Brain, Dna, Dumbbell, Menu, X, Home } from 'lucide-react';
+import { User,Droplet, SmilePlus, Brain, Dna,Menu, X, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MobileNavItemProps {

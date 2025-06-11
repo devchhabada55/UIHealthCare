@@ -19,11 +19,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  ResponsiveContainer,
-  TooltipProps,
-  ScatterChart,
-  Scatter,
+  Legend
 } from "recharts"
 
 export interface ChartConfig {
@@ -50,22 +46,6 @@ export interface ChartConfig {
   cx?: string
   cy?: string
   children?: React.ReactNode
-}
-
-export function Chart({
-  children,
-  className,
-}: {
-  children: React.ReactElement | React.ReactElement[]
-  className?: string
-}) {
-  return (
-    <div className={className}>
-      <ResponsiveContainer width="100%" height="100%">
-        {children}
-      </ResponsiveContainer>
-    </div>
-  )
 }
 
 export function ChartArea({
@@ -302,8 +282,6 @@ export function ChartGrid(props: React.ComponentPropsWithoutRef<typeof Cartesian
 }
 
 export function ChartLineSeries({
-  data,
-  dataKey,
   valueKey,
   name,
   strokeColor = "#0ea5e9",
@@ -347,8 +325,6 @@ export function ChartLineSeries({
 }
 
 export function ChartBarSeries({
-  data,
-  dataKey,
   valueKey,
   name,
   color = "#0ea5e9",
@@ -380,8 +356,7 @@ export function ChartPieSeries({
   colorKey,
   innerRadius = "0",
   outerRadius = "80%",
-  paddingAngle,
-  name,
+  paddingAngle
 }: {
   data: any[]
   dataKey: string
@@ -417,8 +392,6 @@ export function ChartPieSeries({
 }
 
 export function ChartRadarSeries({
-  data,
-  dataKey,
   valueKey,
   name,
   stroke = "#8884d8",

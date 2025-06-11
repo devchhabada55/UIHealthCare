@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Sidebar } from './Sidebar';
 import { useLocation } from 'react-router-dom';
 
