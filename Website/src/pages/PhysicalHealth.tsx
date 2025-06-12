@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Activity, 
   TrendingDown, 
@@ -6,7 +7,8 @@ import {
   Target,
   Heart,
   Dumbbell,
-  User
+  User,
+  ArrowLeft
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -24,6 +26,7 @@ import {
 
 const PhysicalHealthReport = () => {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,7 +35,7 @@ const PhysicalHealthReport = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const [userData] = useState({
+  const [] = useState({
     name: "Yves Vannerom",
     age: 45,
     height: 184,
@@ -70,14 +73,6 @@ const PhysicalHealthReport = () => {
     "Minimal regular physical activity (mainly padel)"
   ];
 
-  // const recommendations = [
-  //   "Start with 2-3 cardio sessions per week (walking, swimming)",
-  //   "Begin basic strength training with bodyweight exercises",
-  //   "Continue physiotherapy for back pain management",
-  //   "Gradually increase activity level over 3-6 months",
-  //   "Focus on core strengthening and mobility work"
-  // ];
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -90,25 +85,16 @@ const PhysicalHealthReport = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 pt-20">
       <div className="max-w-6xl mx-auto space-y-6">
-        
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Physical Health Assessment</h1>
-              <p className="text-gray-600 mt-1">{userData.name} • {userData.testDate}</p>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-gray-500">
-                Age: {userData.age} | Height: {userData.height}cm | Weight: {userData.weight}kg
-              </div>
-              <div className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium mt-2">
-                Below Average Fitness Level
-              </div>
-            </div>
-          </div>
+        {/* Back Button */}
+        <div className="mb-4">
+            <button
+                onClick={() => navigate(-1)}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                <ArrowLeft className="w-5 h-5 mr-2" /> Back
+            </button>
         </div>
 
         {/* Key Metrics */}
@@ -199,7 +185,7 @@ const PhysicalHealthReport = () => {
           <div className="space-y-2">
             {keyFindings.map((finding, index) => (
               <div key={index} className="flex items-start">
-                <TrendingDown className="w-4 h-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
+                <TrendingDown className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0 mt-1" />
                 <p className="text-gray-700">{finding}</p>
               </div>
             ))}
@@ -208,62 +194,24 @@ const PhysicalHealthReport = () => {
 
         {/* Recommendations */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Recommended Action Plan</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="font-medium text-gray-900 mb-3">Immediate Actions (0-4 weeks)</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Continue physiotherapy for back pain</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Start with 20-minute daily walks</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-red-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Begin basic stretching routine</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-gray-900 mb-3">Short-term Goals (1-3 months)</h3>
-              <ul className="space-y-2">
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Increase VO2 max to 38 ml/min/kg</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Achieve 15 consecutive push-ups</span>
-                </li>
-                <li className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 mt-2"></div>
-                  <span className="text-sm">Exercise 3 times per week consistently</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <h2 className="text-lg font-semibold mb-4 flex items-center">
+            <Activity className="w-5 h-5 mr-2 text-green-500" />
+            Recommendations
+          </h2>
+          <ul className="list-disc pl-5 space-y-2 text-gray-700">
+            <li>Start with 2-3 cardio sessions per week (walking, swimming)</li>
+            <li>Begin basic strength training with bodyweight exercises</li>
+            <li>Continue physiotherapy for back pain management</li>
+            <li>Gradually increase activity level over 3-6 months</li>
+            <li>Focus on core strengthening and mobility work</li>
+          </ul>
         </div>
 
-        {/* Weekly Plan */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Suggested Weekly Schedule</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-medium text-blue-900">Monday & Wednesday</h3>
-              <p className="text-sm text-blue-700 mt-1">Cardio (30 min walking/swimming)</p>
-            </div>
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h3 className="font-medium text-green-900">Tuesday & Thursday</h3>
-              <p className="text-sm text-green-700 mt-1">Strength training (bodyweight exercises)</p>
-            </div>
-            <div className="bg-purple-50 p-4 rounded-lg">
-              <h3 className="font-medium text-purple-900">Friday</h3>
-              <p className="text-sm text-purple-700 mt-1">Flexibility & mobility work</p>
-            </div>
-          </div>
+        {/* Action Plan Button */}
+        <div className="text-center mt-6">
+          <button className="bg-health-blue hover:bg-health-blue-dark text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">
+            View Detailed Action Plan
+          </button>
         </div>
 
       </div>
@@ -271,4 +219,4 @@ const PhysicalHealthReport = () => {
   );
 };
 
-export default PhysicalHealthReport;
+export default PhysicalHealthReport; 

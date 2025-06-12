@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   Syringe,
   AlertTriangle,
+  ArrowLeft
 } from "lucide-react";
 
 const MedicalSupplementsReport = () => {
-  const reportDate = "April–May 2025";
+  //const reportDate = "April–May 2025";
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 4000); // 4 seconds delay
@@ -72,10 +75,14 @@ const MedicalSupplementsReport = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-4xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h1 className="text-2xl font-bold text-gray-900">Medical Supplement & Therapy Insights</h1>
-          <p className="text-gray-600 mt-1">Summary Report • {reportDate}</p>
+        {/* Back Button */}
+        <div className="mb-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" /> Back
+          </button>
         </div>
 
         {/* Supplements & Therapy */}

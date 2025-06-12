@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -12,6 +13,7 @@ import {
   ListItemText,
   ListItemIcon,
   Chip,
+  Button,
 } from '@mui/material';
 import {
   MonitorHeart,
@@ -20,6 +22,7 @@ import {
   Warning,
   TrendingUp,
   Favorite,
+  ArrowLeft,
 } from '@mui/icons-material';
 
 // Color scheme for consistent UI
@@ -151,6 +154,7 @@ const realNutritionData = {
 // Component implementation
 const Nutrition: React.FC = () => {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 4000); // 4 seconds delay
@@ -229,41 +233,14 @@ const Nutrition: React.FC = () => {
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      {/* Patient Header */}
-      <Card sx={{ mb: 4, bgcolor: COLORS.card }}>
-        <CardContent>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} md={8}>
-              <Typography variant="h4" color={COLORS.text} gutterBottom>
-                Health Analysis Report
-              </Typography>
-              <Typography variant="h6" color={COLORS.text}>
-                {realNutritionData.patientInfo.name} • Age {realNutritionData.patientInfo.age} • {realNutritionData.patientInfo.gender}
-              </Typography>
-              <Typography variant="body2" color={COLORS.text}>
-                Test Date: {realNutritionData.patientInfo.testDate}
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Box textAlign="center">
-                <Typography variant="subtitle1" color={COLORS.text}>Biological Age</Typography>
-                <Typography variant="h3" color={COLORS.error}>
-                  {realNutritionData.patientInfo.biologicalAge}
-                </Typography>
-                <Typography variant="body2" color={COLORS.text}>
-                  vs {realNutritionData.patientInfo.chronologicalAge} years chronological
-                </Typography>
-                <Chip 
-                  label={`Aging Speed: ${realNutritionData.patientInfo.agingSpeed}`}
-                  color="error"
-                  sx={{ mt: 1 }}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+      {/* Back Button */}
+      <Box sx={{ mb: 4 }}>
+        <Button variant="outlined" onClick={() => navigate(-1)} startIcon={<ArrowLeft />}>
+          Back
+        </Button>
+      </Box>
 
+      {/* Key Metrics */}
       <Grid container spacing={4}>
         {/* Blood Sugar Control */}
         <Grid item xs={12} md={6}>

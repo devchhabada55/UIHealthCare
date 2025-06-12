@@ -52,11 +52,10 @@ const SleepRecoveryReport: React.FC = () => {
 
   return (
     <Container maxWidth="lg" className="py-10">
-      <Box className="flex justify-between items-center mb-8">
+      <Box className="flex justify-start items-center mb-8">
         <Button variant="outline" onClick={() => navigate(-1)}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
-        <Typography variant="h4">Sleep & Recovery Report</Typography>
       </Box>
 
       <Grid container spacing={4}>

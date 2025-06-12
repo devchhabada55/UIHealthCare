@@ -47,7 +47,7 @@ const ChatbotPopup = () => {
         // Chatbot Toggle Button - Size remains the same
         <Button
           className="rounded-full w-20 h-20 text-white shadow-lg flex items-center justify-center
-                     bg-health-blue hover:bg-health-blue-dark transition-colors duration-200
+                     bg-teal-600 hover:bg-teal-700 transition-colors duration-200
                      p-4 transform hover:scale-110"
           onClick={toggleChat}
         >
@@ -61,7 +61,7 @@ const ChatbotPopup = () => {
                      lg:w-[400px] lg:h-[600px] // Slightly larger for large screens if desired
                      "
         >
-          <div className="flex justify-between items-center p-4 bg-health-blue text-white rounded-t-lg">
+          <div className="flex justify-between items-center p-4 bg-teal-600 text-white rounded-t-lg">
             <h3 className="text-lg font-semibold">Health Chatbot</h3>
             <Button variant="ghost" size="icon" onClick={toggleChat} className="text-white hover:bg-white/20">
               <X className="h-5 w-5" />
@@ -75,7 +75,7 @@ const ChatbotPopup = () => {
                   "p-3 rounded-lg max-w-[80%]",
                   msg.sender === 'user'
                     ? "bg-health-blue/10 text-right ml-auto"
-                    : "bg-gray-100 text-left mr-auto"
+                    : "bg-teal-50 text-left mr-auto"
                 )}
               >
                 {msg.text}
@@ -89,7 +89,7 @@ const ChatbotPopup = () => {
               onChange={e => setInputMessage(e.target.value)}
               className="flex-1"
             />
-            <Button type="submit" size="icon" disabled={loading}>
+            <Button type="submit" size="icon" disabled={loading} className="bg-teal-600 hover:bg-teal-700">
               {loading ? 'Sending...' : <Send className="h-5 w-5" />}
             </Button>
           </form>

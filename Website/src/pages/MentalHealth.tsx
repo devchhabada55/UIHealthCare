@@ -148,13 +148,10 @@ const MentalHealth = () => {
 
   return (
     <Container maxWidth="lg" className="space-y-6 py-8">
-      <Box className="flex justify-between items-center">
+      <Box className="flex justify-start items-center mb-4">
         <Button variant="outline" onClick={() => navigate(-1)}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Back
         </Button>
-        <Typography variant="h4" color={COLORS.text}>
-          Mental Health Dashboard
-        </Typography>
       </Box>
 
       <Grid container spacing={4}>

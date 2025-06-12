@@ -44,13 +44,13 @@ export const SpiderChart: React.FC<SpiderChartProps> = ({ data }) => {
           data.inflammatory,
           data.medical,
         ],
-        backgroundColor: 'rgba(26, 115, 232, 0.2)',
-        borderColor: 'rgba(26, 115, 232, 1)',
+        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+        borderColor: 'rgba(20, 184, 166, 1)',
         borderWidth: 2,
-        pointBackgroundColor: 'rgba(26, 115, 232, 1)',
+        pointBackgroundColor: 'rgba(20, 184, 166, 1)',
         pointBorderColor: '#fff',
         pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgba(26, 115, 232, 1)',
+        pointHoverBorderColor: 'rgba(20, 184, 166, 1)',
       },
     ],
   };
@@ -65,12 +65,15 @@ export const SpiderChart: React.FC<SpiderChartProps> = ({ data }) => {
         suggestedMax: 100,
         pointLabels: {
           font: {
-            size: 12,
+            size: 10,
           },
         },
         ticks: {
           display: true,
           beginAtZero: true,
+          font: {
+            size: 8,
+          }
         },
       },
     },
@@ -82,12 +85,16 @@ export const SpiderChart: React.FC<SpiderChartProps> = ({ data }) => {
         enabled: true,
       }
     },
+    layout: {
+      padding: 20
+    },
+    responsive: true,
     maintainAspectRatio: false,
     aspectRatio: 1,
   };
 
   return (
-    <div className="w-full h-full min-h-[400px] p-4">
+    <div className="w-full h-full p-2">
       <Radar data={chartData} options={options} />
     </div>
   );

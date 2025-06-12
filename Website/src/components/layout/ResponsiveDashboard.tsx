@@ -5,7 +5,9 @@ import { Sidebar } from './Sidebar';
 const ResponsiveDashboard: React.FC = () => {
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar />
+      <Sidebar isOpen={false} onClose={function (): void {
+        throw new Error('Function not implemented.');
+      } } />
       <main className="flex-1 overflow-y-auto p-8">
         <Outlet />
       </main>
